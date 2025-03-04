@@ -162,7 +162,7 @@ if (isset($_POST['enviar'])) {
     </div>
 
     <!--Formulario login-->
-    <div class="container border my-2">
+    <div class="container border my-2 d-flex justify-content-center">
         <form action="login.php" method="POST">
             <label for="name">Usuario:
                 <!--En caso de haber un usuario introducido anteriormente lo colocamos en el input-->
@@ -188,6 +188,27 @@ if (isset($_POST['enviar'])) {
                                                                         echo "checked";
                                                                     } ?>>Mantener la sesion inciada</label>
             <br />
+            <!--Controlamos los errores con un mensaje-->
+            <?php
+
+            //Si tenemos peticion de error
+            if (isset($_GET['error'])) {
+                //Vemos que tipo de error hemos obtenido 
+                if ($_GET['error'] == "datos") {
+                    //Si estan mal las creedenciales
+                    echo '<div class="alert alert-danger"style="margin-top:5px;">'
+                        . "Tu usuario o/y tu contraseña no son correctos!! :(<br/>" . '</div>';
+                } elseif ($_GET['error'] == "vacios") {
+                    //Si hay campos vacíos
+                    echo '<div class="alert alert-danger"style="margin-top:5px;">'
+                        . "Hay algún campo vacío!! :(<br/>" . '</div>';
+                } elseif ($_GET['error'] == "fuera") {
+                    //Si hay campos vacíos
+                    echo '<div class="alert alert-danger"style="margin-top:5px;">'
+                        . "No puede acceder a esta página, debe loguearse!! :(<br/>" . '</div>';
+                }
+            }
+            ?>
             <input type="submit" value="Entrar" name="enviar" class="btn btn-success" />
         </form>
     </div>
