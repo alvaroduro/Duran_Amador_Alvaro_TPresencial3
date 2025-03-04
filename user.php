@@ -8,17 +8,17 @@ session_start();
 
 //Traemos si hay sesion abierta
 $abierta_key = $_SESSION['usuario'] ?? "abierta_" . $nuevoUser;
-//echo $abierta_key;
+echo $abierta_key . "<br>";
 
 // Obtenemos el nombre de usuario si recordo o no 
-$usuario = $_SESSION['usuario'] ?? $_COOKIE[$abierta_key];
-//echo $usuario;
+$usuario = $_SESSION['usuario'] ?? $_COOKIE[$abierta_key]; //Guardamos nombre sesion abierta
+echo $usuario . "<br>";
 
 // Obtener el contador de accesos
 $contador_key = "contador_" . $usuario;
-$contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
+$contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1; // Si no hay sesion ponemos a 1
 
-//echo "contador = " . $contador;
+echo "contador = " . $contador . "<br>";
 ?>
 
 <html>
@@ -28,7 +28,7 @@ $contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
 </head>
 
 <body>
-    <div class="encabezado text-center my-5">
+    <div class="encabezado text-center">
         <h1>DAWES-Tarea Presencial 3:Sesiones y Cookies</h1>
     </div>
     <div class="container d-flex justify-content-center align-items-center gap-3 flex-wrap my-4">
@@ -55,8 +55,6 @@ $contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
 
                     //Sumamos 1 al contador de visitas-----------------------------
                     setcookie($contador_key, ++$_COOKIE[$contador_key], time() + 3600, "/");
-                    // Modificamos la cookie
-
                     //echo "<br>Sumamos 1 a las visitas";
 
                     //Mostramos mensaje
@@ -85,7 +83,7 @@ $contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
                         }
 
                         // Mostrar la fecha
-                       // echo "<br>Mostramos última visita con sesión cerrada (fecha actual)=" . $fecha;
+                        //echo "<br>Mostramos última visita con sesión cerrada (fecha actual)=" . $fecha;
                         echo "<h2>Tu última visita fue " . $fecha . "</h2></br>";
                     }
 
@@ -95,7 +93,6 @@ $contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
                     //---------------Usuario 1 vez loguea-----------------------------
                 } else {
                     if ($_SESSION['usuario']) {
-
                         //Establecemos cookie contador
                         setcookie($contador_key, 1, time() + 3600, "/"); //validez  1h
                         //echo "<br>Establecemos cookie contador a 1";
@@ -110,8 +107,8 @@ $contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
 
                         //echo "<br>Metemos cookie fecha actual(1 vez iniciada sesion)";
 
-                        //Mostramos mensajes bienvenida
-                        echo "<h2>Bienvenido a mi página por primera vez " . $_SESSION['usuario'] . "</h2>";
+                        //Mostramos mensajes
+                        echo "<h2>Bienvenido a mi página por primera vez <b>" . $usuario . ".</b></h2>";
 
                         //Vemos si se ha creado la cookie de fecha
                         if (isset($_COOKIE['fecha'])) {
@@ -126,34 +123,35 @@ $contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
             }
             ?>
     </div>
+
+
     <div class="container d-flex justify-content-center my-3">
 
         <!--FORMULARIO OPCIONES-->
         <form method="post" action="opciones.php">
             <div class="text-center">
+                <!-- Título con borde -->
+                <div class="container">
 
-
-                <!-- Título-->
-                <div class="container text-center">
-                    <h1>PRINCIPAL-ADMIN</h1>
+                    <h1>Opciones User</h1>
 
                     <!-- Opciones tipo radio -->
                     <div class="mt-3">
 
-                        <!--Opcion Masculino-->
+                        <!--Opcion Recre-->
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="opcion" id="masculino" value="masculino" <?php if (isset($_COOKIE['opcion']) && $_COOKIE['opcion'] == "masculino") {
-                                                                                                                            echo "checked";
-                                                                                                                        } ?>>
-                            <label class="form-check-label" for="opcionA">Masculino</label>
+                            <input class="form-check-input" type="radio" name="opcion" id="recre" value="recre" <?php if (isset($_COOKIE['opcion']) && $_COOKIE['opcion'] == "recre") {
+                                                                                                                    echo "checked";
+                                                                                                                } ?>>
+                            <label class="form-check-label" for="recre">Recre</label>
                         </div>
 
-                        <!--Opcion Femenino-->
+                        <!--Opcion Recre-->
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="opcion" id="femenino" value="femenino" <?php if (isset($_COOKIE['opcion']) && $_COOKIE['opcion'] == "femenino") {
-                                                                                                                            echo "checked";
-                                                                                                                        } ?>>
-                            <label class="form-check-label" for="opcionB">Femenino</label>
+                            <input class="form-check-input" type="radio" name="opcion" id="sanro" value="sanro" <?php if (isset($_COOKIE['opcion']) && $_COOKIE['opcion'] == "sanro") {
+                                                                                                                    echo "checked";
+                                                                                                                } ?>>
+                            <label class="form-check-label" for="sanro">San Roque</label>
                         </div>
                     </div>
 
