@@ -26,8 +26,9 @@ $contador = $_SESSION['contador'] ?? $_COOKIE[$contador_key] ?? 1;
 <body>
     <div class="container d-flex flex-direction-column justify-content-center my-5">
         <h1>PAG-MASCULINO</h1>
+        >
     </div>
-
+    <h2>Información para Hombres</h2>
     <?php
     //Si no existe la sesion ni mantener la sesion abierta
     if (!isset($_SESSION['logueado']) && (!isset($_COOKIE[$abierta_key]))) {
